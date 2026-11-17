@@ -1,0 +1,242 @@
+/* SIAKAD SMA RAD - Modern Design System */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --secondary: #059669;
+  --accent: #d97706;
+  --bg-dark: #0f172a;
+  --card-dark: #1e293b;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.dark .glass-panel {
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.8);
+}
+
+/* ========================================= */
+/* FINGERPRINT BIOMETRIC SCANNER STYLING     */
+/* ========================================= */
+.fingerprint-sensor-pad {
+  position: relative;
+  width: 180px;
+  height: 220px;
+  border-radius: 28px;
+  background: radial-gradient(circle at center, #0f172a 30%, #020617 100%);
+  border: 3px solid #38bdf8;
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.35), inset 0 0 20px rgba(56, 189, 248, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+}
+
+.fingerprint-sensor-pad:hover {
+  transform: translateY(-2px);
+  border-color: #10b981;
+  box-shadow: 0 0 35px rgba(16, 185, 129, 0.5), inset 0 0 25px rgba(16, 185, 129, 0.3);
+}
+
+.fingerprint-sensor-pad.scanning {
+  border-color: #10b981;
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+}
+
+.fingerprint-laser-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #10b981, #38bdf8, transparent);
+  box-shadow: 0 0 15px #10b981;
+  top: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fingerprint-sensor-pad.scanning .fingerprint-laser-line {
+  opacity: 1;
+  animation: laser-sweep 1.8s infinite ease-in-out;
+}
+
+@keyframes laser-sweep {
+  0% {
+    top: 5%;
+    opacity: 0.3;
+  }
+  50% {
+    top: 90%;
+    opacity: 1;
+  }
+  100% {
+    top: 5%;
+    opacity: 0.3;
+  }
+}
+
+/* Fingerprint SVG curves */
+.fingerprint-icon {
+  width: 90px;
+  height: 120px;
+  stroke: #38bdf8;
+  filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5));
+  transition: stroke 0.3s ease;
+}
+
+.fingerprint-sensor-pad.scanning .fingerprint-icon {
+  stroke: #10b981;
+  filter: drop-shadow(0 0 12px rgba(16, 185, 129, 0.8));
+}
+
+/* ========================================= */
+/* STUDENT MANUAL ATTENDANCE PILL CONTROLS   */
+/* ========================================= */
+.status-pill-radio input[type="radio"]:checked + label.pill-hadir {
+  background-color: #10b981;
+  color: #ffffff;
+  border-color: #059669;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+}
+
+.status-pill-radio input[type="radio"]:checked + label.pill-izin {
+  background-color: #3b82f6;
+  color: #ffffff;
+  border-color: #2563eb;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.35);
+}
+
+.status-pill-radio input[type="radio"]:checked + label.pill-sakit {
+  background-color: #f59e0b;
+  color: #ffffff;
+  border-color: #d97706;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.35);
+}
+
+.status-pill-radio input[type="radio"]:checked + label.pill-alfa {
+  background-color: #ef4444;
+  color: #ffffff;
+  border-color: #dc2626;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.35);
+}
+
+/* WhatsApp Phone Simulation */
+.wa-phone-container {
+  max-width: 380px;
+  border-radius: 36px;
+  border: 10px solid #1f2937;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  background: #0b141a;
+}
+
+.wa-chat-bg {
+  background-color: #0b141a;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.wa-bubble-received {
+  background-color: #202c33;
+  color: #e9edef;
+  border-radius: 0 12px 12px 12px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================= */
+/* OFFICIAL REPORT CARD PRINT STYLES (A4)    */
+/* ========================================= */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  header, aside, #demo-role-buttons, #global-toast, .no-print, button, .tab-view, #modal-create-materi, #modal-review-submissions, #image-preview-modal {
+    display: none !important;
+  }
+
+  #modal-cetak-rapor {
+    position: static !important;
+    display: block !important;
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    box-shadow: none !important;
+  }
+
+  .rapor-paper {
+    box-shadow: none !important;
+    border: none !important;
+    padding: 10mm 15mm !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    max-width: 210mm !important;
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .rapor-table th, .rapor-table td {
+    border: 1px solid #334155 !important;
+    color: #000000 !important;
+  }
+
+  .rapor-kop-divider {
+    border-top: 3px double #000000 !important;
+  }
+}
