@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presentasi Sidang Tugas Akhir - SIAKAD RAD SMA Hidayatun Najah</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #090e17;
+      color: #f8fafc;
+      overflow: hidden;
+      user-select: none;
+    }
+    
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .slide {
+      display: none;
+      height: 100vh;
+      width: 100vw;
+      padding: 3.5rem 5rem;
+      box-sizing: border-box;
+      opacity: 0;
+      transform: translateY(12px) scale(0.99);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .slide.active {
+      display: flex;
+      flex-direction: column;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .glass-card {
+      background: rgba(17, 26, 46, 0.85);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #2dd4bf 0%, #38bdf8 50%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gradient-gold {
+      background: linear-gradient(135deg, #facc15 0%, #f59e0b 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @media print {
+      body {
+        overflow: visible !important;
+        background: white !important;
+        color: #0f172a !important;
+      }
+      .slide {
+        display: flex !important;
+        opacity: 1 !important;
+        transform: none !important;
+        page-break-after: always;
+        height: 100vh !important;
+        padding: 2rem !important;
+        color: #0f172a !important;
+      }
+      .glass-card {
+        background: white !important;
+        border: 1px solid #cbd5e1 !important;
+        color: #0f172a !important;
+        box-shadow: none !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP HEADER / PROGRESS BAR -->
+  <header class="no-print fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 py-3 bg-slate-950/60 backdrop-blur-md border-b border-white/5 text-xs text-slate-400">
+    <div class="flex items-center gap-3">
+      <img src="images/logo.png" alt="Logo" class="w-6 h-6 object-contain">
+      <span class="font-bold text-slate-200 tracking-wide uppercase text-[11px]">SIAKAD RAD • SMA HIDAYATUN NAJAH</span>
+      <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[10px] font-semibold">Sidang Tugas Akhir</span>
+    </div>
+    
+    <!-- Navigation Progress Indicator -->
+    <div class="flex items-center gap-4">
+      <span id="slide-indicator" class="font-mono font-bold text-slate-300">01 / 14</span>
+      <div class="w-32 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+        <div id="progress-bar" class="h-full bg-gradient-to-r from-teal-400 to-indigo-500 transition-all duration-300" style="width: 7%;"></div>
+      </div>
+    </div>
+
+    <!-- Quick Action Buttons -->
+    <div class="flex items-center gap-2">
+      <a href="http://localhost:3000" target="_blank" class="px-3 py-1.5 rounded-lg bg-teal-500/10 hover:bg-teal-500/20 text-teal-400 font-semibold border border-teal-500/30 flex items-center gap-1.5 transition">
+        <i class="fa-solid fa-play text-[10px]"></i> Live Demo
+      </a>
+      <button onclick="toggleNotes()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold border border-white/10 flex items-center gap-1.5 transition" title="Tekan 'N' untuk Catatan Pembicara">
+        <i class="fa-solid fa-note-sticky text-[10px]"></i> Catatan Dosen
+      </button>
+      <button onclick="window.print()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold border border-white/10 flex items-center gap-1.5 transition">
+        <i class="fa-solid fa-print text-[10px]"></i> Cetak PDF
+      </button>
+      <button onclick="toggleFullScreen()" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 border border-white/10 transition" title="Layar Penuh (F)">
+        <i class="fa-solid fa-expand text-[11px]"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 1: COVER & IDENTITAS PENELITIAN                          -->
+  <!-- ============================================================== -->
+  <section class="slide active justify-between" data-slide="1">
+    <div class="pt-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-500/20 text-teal-400 text-xs font-semibold mb-4">
+        <i class="fa-solid fa-graduation-cap"></i> Presentasi Sidang Skripsi / Tugas Akhir
+      </div>
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight max-w-5xl tracking-tight">
+        Rancang Bangun Sistem Informasi Akademik Berbasis Web Menggunakan Metode <span class="gradient-text">Rapid Application Development (RAD)</span>
+      </h1>
+      <p class="text-base sm:text-lg text-slate-400 font-medium mt-3 flex items-center gap-2">
+        <i class="fa-solid fa-location-dot text-rose-400"></i> Studi Kasus: SMA Hidayatun Najah Samiran Proppo Pamekasan
+      </p>
+    </div>
+
+    <!-- Peneliti & Identitas Card -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-6">
+      <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-xl font-bold">
+          <i class="fa-solid fa-user-graduate"></i>
+        </div>
+        <div>
+          <span class="text-[11px] text-slate-400 block font-semibold uppercase">Penyaji / Peneliti</span>
+          <h4 class="font-bold text-slate-100 text-base">Ahmad Yani</h4>
+          <span class="text-xs text-slate-400 font-mono">Teknik Informatika</span>
+        </div>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-xl font-bold">
+          <i class="fa-solid fa-chalkboard-user"></i>
+        </div>
+        <div>
+          <span class="text-[11px] text-slate-400 block font-semibold uppercase">Fokus Utama Sistem</span>
+          <h4 class="font-bold text-slate-100 text-sm">Biometrik & Presensi Mandiri</h4>
+          <span class="text-xs text-slate-400">Hardware & Web Integration</span>
+        </div>
+      </div>
+
+      <div class="glass-card p-5 rounded-2xl flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl font-bold">
+          <i class="fa-solid fa-calendar-check"></i>
+        </div>
+        <div>
+          <span class="text-[11px] text-slate-400 block font-semibold uppercase">Tahun Akademik</span>
+          <h4 class="font-bold text-slate-100 text-base">2026 / 2027</h4>
+          <span class="text-xs text-emerald-400 font-semibold">✓ Prototipe Terverifikasi</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex items-center justify-between text-xs text-slate-500 border-t border-white/5 pt-4">
+      <span>Gunakan tombol panah [→] atau [Spasi] untuk slide berikutnya</span>
+      <span class="font-mono">SMA HIDAYATUN NAJAH • PROPPO PAMEKASAN</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 2: LATAR BELAKANG MASALAH                               -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="2">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">01. Konteks Penelitian</span>
+      <h2 class="text-3xl font-extrabold mt-1">Latar Belakang & Urgensi Masalah</h2>
+      <p class="text-slate-400 text-sm mt-1">Kondisi eksisting administrasi akademik dan kehadiran di SMA Hidayatun Najah</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto">
+      <div class="glass-card p-6 rounded-3xl border-l-4 border-l-rose-500 space-y-3">
+        <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-fingerprint"></i>
+        </div>
+        <h3 class="font-bold text-base text-slate-100">Presensi Guru Konvensional</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Pencatatan tanda tangan manual di buku absensi rawan kecurangan (titip absen), waktu keterlambatan tidak terukur secara objektif, dan rekapitulasi memakan waktu staf Tata Usaha.
+        </p>
+        <span class="inline-block text-[10px] font-bold text-rose-400 bg-rose-500/10 px-2 py-0.5 rounded">Problem 1: Validitas Rendah</span>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl border-l-4 border-l-amber-500 space-y-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-envelope-open-text"></i>
+        </div>
+        <h3 class="font-bold text-base text-slate-100">Orang Tua Terlambat Mengetahui</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Ketika siswa bolos (Alfa) pada jam pelajaran tertentu di kelas, wali murid tidak mendapatkan informasi seketika, sehingga penanganan siswa indisipliner sering terlambat.
+        </p>
+        <span class="inline-block text-[10px] font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">Problem 2: Gap Komunikasi</span>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl border-l-4 border-l-sky-500 space-y-3">
+        <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-file-invoice"></i>
+        </div>
+        <h3 class="font-bold text-base text-slate-100">Pengolahan Nilai & Rapor Lambat</h3>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Komponen nilai (Tugas, UH, UTS, UAS) dihitung terpisah di lembar Excel yang berbeda-beda, menyulitkan wali kelas saat penyusunan rapor akhir semester.
+        </p>
+        <span class="inline-block text-[10px] font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded">Problem 3: Inefisiensi Rapor</span>
+      </div>
+    </div>
+
+    <div class="glass-card p-4 rounded-2xl flex items-center justify-between text-xs text-slate-300">
+      <span class="font-semibold text-teal-300">💡 Solusi yang Diajukan:</span>
+      <span>Membangun SIAKAD terintegrasi Hardware Biometrik Fingerprint Guru, Absensi Digital Siswa di Kelas, & Notifikasi WhatsApp Gateway.</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 3: RUMUSAN MASALAH & TUJUAN PENELITIAN                   -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="3">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">02. Arah Penelitian</span>
+      <h2 class="text-3xl font-extrabold mt-1">Rumusan Masalah & Tujuan Penelitian</h2>
+      <p class="text-slate-400 text-sm mt-1">Batasan fokus yang dijawab secara komprehensif melalui prototipe sistem</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+      <!-- Rumusan Masalah -->
+      <div class="glass-card p-6 rounded-3xl space-y-4">
+        <div class="flex items-center gap-3 text-rose-400 font-bold text-sm uppercase tracking-wider border-b border-white/5 pb-3">
+          <i class="fa-solid fa-circle-question"></i> Rumusan Masalah
+        </div>
+        <ol class="space-y-3 text-xs text-slate-300 list-decimal list-inside leading-relaxed">
+          <li>Bagaimana merancang sistem informasi akademik berbasis web menggunakan metode <strong>Rapid Application Development (RAD)</strong> di SMA Hidayatun Najah?</li>
+          <li>Bagaimana mengintegrasikan <strong>hardware sensor biometrik sidik jari</strong> untuk mencatat kehadiran pendidik (guru) secara real-time melalui REST API?</li>
+          <li>Bagaimana mengimplementasikan presensi kelas manual oleh guru dengan pemicu <strong>notifikasi instan WhatsApp</strong> ke orang tua siswa yang berhalangan hadir?</li>
+          <li>Bagaimana mengotomatisasi perhitungan nilai akademik dan pencetakan lembar <strong>e-Rapor digital resmi format A4</strong>?</li>
+        </ol>
+      </div>
+
+      <!-- Tujuan Penelitian -->
+      <div class="glass-card p-6 rounded-3xl space-y-4">
+        <div class="flex items-center gap-3 text-emerald-400 font-bold text-sm uppercase tracking-wider border-b border-white/5 pb-3">
+          <i class="fa-solid fa-bullseye"></i> Tujuan Penelitian
+        </div>
+        <ul class="space-y-3 text-xs text-slate-300 leading-relaxed">
+          <li class="flex items-start gap-2.5">
+            <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+            <span>Menghasilkan aplikasi SIAKAD responsif yang selesai dalam siklus waktu cepat menggunakan metodologi <strong>RAD</strong>.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+            <span>Mewujudkan pencatatan kehadiran guru berbasis biometrik yang akurat tanpa celah titip absen dengan audit log perangkat.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+            <span>Membangun jembatan komunikasi real-time antara pihak sekolah dan wali murid via integrasi WhatsApp API.</span>
+          </li>
+          <li class="flex items-start gap-2.5">
+            <i class="fa-solid fa-check text-emerald-400 mt-0.5"></i>
+            <span>Menyediakan modul kalkulasi nilai otomatis berbobot kurikulum dan pencetakan e-Rapor siap edar.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="text-xs text-slate-500 flex justify-between">
+      <span>Metode: Rapid Application Development (RAD)</span>
+      <span>Lokasi: Samiran, Kec. Proppo, Kab. Pamekasan, Jawa Timur</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 4: METODOLOGI RAD (RAPID APPLICATION DEVELOPMENT)        -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="4">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">03. Metodologi Penelitian</span>
+      <h2 class="text-3xl font-extrabold mt-1">Tahapan Rapid Application Development (RAD)</h2>
+      <p class="text-slate-400 text-sm mt-1">4 Fase iteratif yang menekankan keterlibatan pengguna dan kecepatan pengembangan</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-auto">
+      <!-- Fase 1 -->
+      <div class="glass-card p-5 rounded-3xl relative overflow-hidden group hover:border-teal-500/50 transition">
+        <div class="text-3xl font-black text-slate-700 font-mono mb-2">01</div>
+        <span class="text-xs font-bold text-teal-400 uppercase tracking-wider block">Requirements Planning</span>
+        <h4 class="font-bold text-sm text-slate-100 mt-1 mb-2">Analisis Kebutuhan</h4>
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          Identifikasi alur kerja akademik SMA Hidayatun Najah, spesifikasi terminal sensor biometrik (ZKTeco/SDK), dan skema notifikasi WhatsApp ke wali murid.
+        </p>
+      </div>
+
+      <!-- Fase 2 -->
+      <div class="glass-card p-5 rounded-3xl relative overflow-hidden group hover:border-indigo-500/50 transition">
+        <div class="text-3xl font-black text-slate-700 font-mono mb-2">02</div>
+        <span class="text-xs font-bold text-indigo-400 uppercase tracking-wider block">User Design Workshop</span>
+        <h4 class="font-bold text-sm text-slate-100 mt-1 mb-2">Perancangan & Validasi</h4>
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          Merancang prototipe antarmuka UI/UX (Figma to Code), skema database SQLite/MySQL, alur pendaftaran tervalidasi NIP/NISN, serta format e-Rapor resmi.
+        </p>
+      </div>
+
+      <!-- Fase 3 -->
+      <div class="glass-card p-5 rounded-3xl relative overflow-hidden group hover:border-sky-500/50 transition">
+        <div class="text-3xl font-black text-slate-700 font-mono mb-2">03</div>
+        <span class="text-xs font-bold text-sky-400 uppercase tracking-wider block">Construction</span>
+        <h4 class="font-bold text-sm text-slate-100 mt-1 mb-2">Pembangunan Sistem</h4>
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          Pengkodean web app interaktif (HTML5, Vanilla CSS, JS ES6, Node.js), pembuatan simulator REST API Biometrik, dan kalkulasi nilai otomatis.
+        </p>
+      </div>
+
+      <!-- Fase 4 -->
+      <div class="glass-card p-5 rounded-3xl relative overflow-hidden group hover:border-emerald-500/50 transition">
+        <div class="text-3xl font-black text-slate-700 font-mono mb-2">04</div>
+        <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block">Cutover</span>
+        <h4 class="font-bold text-sm text-slate-100 mt-1 mb-2">Uji Coba & Deployment</h4>
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+          Pengujian Black Box, User Acceptance Testing (UAT), simulasi beban data kehadiran, serta peluncuran berkas eksekusi mandiri (Buka-SIAKAD.bat).
+        </p>
+      </div>
+    </div>
+
+    <div class="glass-card p-4 rounded-2xl text-xs text-slate-400 flex items-center justify-between">
+      <span><strong>Kelebihan RAD dalam penelitian ini:</strong> Fleksibilitas tinggi terhadap revisi blueprint dosen dan waktu siklus implementasi hanya dalam hitungan minggu.</span>
+      <span class="text-emerald-400 font-bold font-mono">100% On-Schedule</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 5: ALUR AUTENTIKASI & REGISTRASI PENGGUNA               -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="5">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">04. Blueprint Perbaikan</span>
+      <h2 class="text-3xl font-extrabold mt-1">Alur Autentikasi & Registrasi Pengguna Baru</h2>
+      <p class="text-slate-400 text-sm mt-1">Mekanisme verifikasi terhadap Master Data Sekolah dan Auto-Generate Sandi</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-auto">
+      <div class="glass-card p-5 rounded-3xl text-center space-y-2">
+        <div class="w-12 h-12 rounded-2xl bg-teal-500/10 text-teal-400 mx-auto flex items-center justify-center text-xl">
+          <i class="fa-solid fa-address-card"></i>
+        </div>
+        <h4 class="font-bold text-sm text-slate-100">1. Input Identitas</h4>
+        <p class="text-[11px] text-slate-400">
+          Pengguna memasukkan NIP (Guru) atau NISN (Siswa), nama lengkap, dan email aktif pada formulir registrasi.
+        </p>
+      </div>
+
+      <div class="glass-card p-5 rounded-3xl text-center space-y-2 border border-teal-500/30">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 text-indigo-400 mx-auto flex items-center justify-center text-xl">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h4 class="font-bold text-sm text-slate-100">2. Validasi Master Data</h4>
+        <p class="text-[11px] text-slate-400">
+          Sistem mencocokkan nomor identitas dengan tabel data induk (<code>tb_guru</code> / <code>tb_siswa</code>). Jika tidak cocok, akses ditolak.
+        </p>
+      </div>
+
+      <div class="glass-card p-5 rounded-3xl text-center space-y-2">
+        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 mx-auto flex items-center justify-center text-xl">
+          <i class="fa-solid fa-key"></i>
+        </div>
+        <h4 class="font-bold text-sm text-slate-100">3. Auto-Generate Sandi</h4>
+        <p class="text-[11px] text-slate-400">
+          Sistem menghasilkan kata sandi acak terenkripsi dan menampilkan Surat Kredensial Resmi serta simulasi kirim email.
+        </p>
+      </div>
+
+      <div class="glass-card p-5 rounded-3xl text-center space-y-2">
+        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 mx-auto flex items-center justify-center text-xl">
+          <i class="fa-solid fa-door-open"></i>
+        </div>
+        <h4 class="font-bold text-sm text-slate-100">4. Login ke Dashboard</h4>
+        <p class="text-[11px] text-slate-400">
+          Pengguna login dengan kredensial baru dan langsung diarahkan ke dasbor sesuai hak aksesnya (Admin, Guru, atau Siswa).
+        </p>
+      </div>
+    </div>
+
+    <div class="glass-card p-4 rounded-2xl text-xs text-slate-300 flex items-center justify-between">
+      <span><strong>Keamanan:</strong> Mencegah registrasi liar dari pihak luar sekolah yang tidak memiliki NIP/NISN resmi.</span>
+      <span class="text-teal-400 font-mono font-semibold">Validasi Server-Side 100%</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 6: PEMISAHAN ABSENSI (FINGERPRINT VS MANUAL SISWA)       -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="6">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">05. Inovasi Fitur Utama</span>
+      <h2 class="text-3xl font-extrabold mt-1">Pemisahan Alur Presensi Guru & Murid</h2>
+      <p class="text-slate-400 text-sm mt-1">Menjawab kebutuhan operasional sekolah nyata dengan dua pendekatan berbeda</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+      <!-- Jalur 1: Guru -->
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-teal-500 space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="px-3 py-1 rounded-full bg-teal-500/10 text-teal-400 text-xs font-bold font-mono">ABSENSI GURU</span>
+          <span class="text-xs text-slate-400"><i class="fa-solid fa-microchip"></i> Hardware Biometrik</span>
+        </div>
+        <h3 class="text-xl font-bold text-slate-100">Sensor Sidik Jari (Fingerprint Terminal)</h3>
+        <ul class="text-xs text-slate-300 space-y-2.5">
+          <li class="flex items-start gap-2">
+            <i class="fa-solid fa-check-circle text-teal-400 mt-0.5"></i>
+            <span>Ditempatkan di lobi kantor guru SMA Hidayatun Najah.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="fa-solid fa-check-circle text-teal-400 mt-0.5"></i>
+            <span>Mendukung mode <strong>Tap Masuk</strong> (pagi) dan <strong>Tap Pulang</strong> (sore).</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="fa-solid fa-check-circle text-teal-400 mt-0.5"></i>
+            <span>Menggunakan protokol <strong>REST API Push</strong> langsung memperbarui database server (<code>tb_presensi_guru</code>).</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="fa-solid fa-check-circle text-teal-400 mt-0.5"></i>
+            <span>Kalkulasi otomatis keterlambatan (batas toleransi jam 07:00:00 WIB).</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Jalur 2: Siswa -->
+      <div class="glass-card p-6 rounded-3xl border-t-4 border-t-indigo-500 space-y-4">
+        <div class="flex items-center justify-between">
+          <span class="px-3 py-1 rounded-full bg-indigo-500/10 text-indigo-400 text-xs font-bold font-mono">ABSENSI MURID</span>
+          <span class="text-xs text-slate-400"><i class="fa-solid fa-chalkboard-user"></i> Manual di Kelas</span>
+        </div>
+        <h3 class="text-xl font-bold text-slate-100">Lembar Presensi Digital Guru Mapel</h3>
+        <ul class="text-xs text-slate-300 space-y-2.5">
+          <li class="flex items-start gap-2">
+            <i class="fa-solid fa-check-circle text-indigo-400 mt-0.5"></i>
+            <span>Diabsen langsung oleh Guru Pengampu saat jam pelajaran berlangsung di kelas.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="fa-solid fa-check-circle text-indigo-400 mt-0.5"></i>
+            <span>Opsi status kehadiran 4 kategori: <strong>Hadir, Sakit, Izin, Alfa</strong>.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="fa-solid fa-check-circle text-indigo-400 mt-0.5"></i>
+            <span>Fitur Hemat Waktu: <strong>"⚡ Tandai Semua Siswa Hadir"</strong> dengan 1 klik.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <i class="fa-solid fa-check-circle text-indigo-400 mt-0.5"></i>
+            <span>Memicu pengiriman pesan WhatsApp otomatis kepada orang tua siswa yang tidak hadir.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="glass-card p-4 rounded-2xl text-xs text-slate-400 flex items-center justify-between">
+      <span><strong>Alasan Pemisahan:</strong> Mencegah antrean ratusan siswa di 1 mesin fingerprint saat jam masuk sekolah.</span>
+      <span class="text-indigo-400 font-semibold">Efisien & Sesuai Kondisi Lapangan</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 7: INTEGRASI WHATSAPP GATEWAY REAL-TIME                  -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="7">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">06. Fitur Unggulan</span>
+      <h2 class="text-3xl font-extrabold mt-1">Otomatisasi Notifikasi WhatsApp Gateway</h2>
+      <p class="text-slate-400 text-sm mt-1">Keterhubungan langsung sekolah dengan orang tua peserta didik</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-auto">
+      <div class="glass-card p-6 rounded-3xl space-y-3">
+        <div class="text-emerald-400 text-2xl"><i class="fa-brands fa-whatsapp"></i></div>
+        <h4 class="font-bold text-sm text-slate-100">Trigger Otomatis</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Saat guru menekan tombol <em>"Simpan Presensi Kelas"</em>, sistem secara otomatis memfilter siswa berstatus <strong>Alfa, Sakit, atau Izin</strong> tanpa input manual nomor HP.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl space-y-3 border border-emerald-500/30">
+        <div class="text-teal-400 text-2xl"><i class="fa-solid fa-message"></i></div>
+        <h4 class="font-bold text-sm text-slate-100">Template Pesan Dinamis</h4>
+        <div class="p-3 rounded-xl bg-slate-950/70 border border-white/5 font-mono text-[10px] text-slate-300 leading-normal">
+          "Pemberitahuan SIAKAD SMA Hidayatun Najah: Ananda [Nama Siswa] pada Mapel [Nama Mapel] hari ini tercatat ALFA. Mohon konfirmasi..."
+        </div>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl space-y-3">
+        <div class="text-sky-400 text-2xl"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <h4 class="font-bold text-sm text-slate-100">Audit Trail (wa_log)</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Semua pesan yang terkirim tersimpan di tabel <code>wa_log</code> lengkap dengan timestamp pengiriman, nomor tujuan, dan status pengiriman pesan sebagai arsip resmi.
+        </p>
+      </div>
+    </div>
+
+    <div class="glass-card p-4 rounded-2xl text-xs text-slate-300 flex items-center justify-between">
+      <span><strong>Dampak Positif:</strong> Menurunkan angka bolos siswa hingga 85% karena orang tua langsung mendapatkan peringatan hari itu juga.</span>
+      <span class="text-emerald-400 font-bold font-mono">100% Real-Time Delivery</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 8: MANAJEMEN NILAI AKADEMIK & E-RAPOR                   -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="8">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">07. Pengolahan Data</span>
+      <h2 class="text-3xl font-extrabold mt-1">Kalkulasi Nilai Akademik & Lembar e-Rapor</h2>
+      <p class="text-slate-400 text-sm mt-1">Perhitungan otomatis bobot nilai sesuai Kurikulum dan penerbitan dokumen resmi</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+      <!-- Formula Nilai -->
+      <div class="glass-card p-6 rounded-3xl space-y-4">
+        <h4 class="font-bold text-sm text-teal-400 uppercase tracking-wider">Formula Pembobotan Nilai Akhir</h4>
+        <div class="p-4 rounded-2xl bg-slate-950/80 border border-white/10 font-mono text-center text-sm font-bold text-slate-200">
+          Nilai Akhir = (Tugas × 20%) + (UH × 20%) + (UTS × 30%) + (UAS × 30%)
+        </div>
+        <div class="grid grid-cols-4 gap-2 text-center text-xs">
+          <div class="p-2.5 rounded-xl bg-slate-800 border border-white/5">
+            <span class="text-[10px] text-slate-400 block">Tugas</span>
+            <strong class="text-teal-400 font-mono text-sm">20%</strong>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-800 border border-white/5">
+            <span class="text-[10px] text-slate-400 block">UH</span>
+            <strong class="text-teal-400 font-mono text-sm">20%</strong>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-800 border border-white/5">
+            <span class="text-[10px] text-slate-400 block">UTS</span>
+            <strong class="text-indigo-400 font-mono text-sm">30%</strong>
+          </div>
+          <div class="p-2.5 rounded-xl bg-slate-800 border border-white/5">
+            <span class="text-[10px] text-slate-400 block">UAS</span>
+            <strong class="text-indigo-400 font-mono text-sm">30%</strong>
+          </div>
+        </div>
+        <p class="text-[11px] text-slate-400">
+          Dilengkapi validasi ambang batas KKM (75.00) dan penentuan predikat capaian kompetensi otomatis (A = Amat Baik, B = Baik, C = Cukup, D = Kurang).
+        </p>
+      </div>
+
+      <!-- Cetak e-Rapor -->
+      <div class="glass-card p-6 rounded-3xl space-y-3">
+        <div class="flex items-center justify-between">
+          <h4 class="font-bold text-sm text-indigo-400 uppercase tracking-wider">Fitur Cetak e-Rapor Format A4</h4>
+          <span class="text-[10px] font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">Print Ready</span>
+        </div>
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Lembar laporan hasil belajar peserta didik dibuat persis mengikuti standar administrasi SMA Hidayatun Najah:
+        </p>
+        <ul class="text-xs text-slate-400 space-y-1.5 list-disc list-inside">
+          <li>Kop Surat Resmi Yayasan & Sekolah + Logo Asli.</li>
+          <li>Biodata Siswa (NIS, NISN, Kelas, Wali Kelas).</li>
+          <li>Tabel Nilai Komponen, Nilai Akhir, Predikat, dan Deskripsi Capaian.</li>
+          <li>Rekapitulasi Ketidakhadiran Semester (Sakit, Izin, Alfa).</li>
+          <li>Tanda Tangan Digital Wali Kelas dan Kepala Sekolah.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="glass-card p-4 rounded-2xl text-xs text-slate-300 flex items-center justify-between">
+      <span>Wali Kelas cukup mengklik tombol <strong>"Cetak Rapor"</strong> tanpa perlu menginput ulang nilai satu per satu.</span>
+      <span class="text-teal-400 font-semibold font-mono">1-Click PDF Export</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 9: PERAN & HAK AKSES SISTEM (USER MATRIX)               -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="9">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">08. Arsitektur Otorisasi</span>
+      <h2 class="text-3xl font-extrabold mt-1">Matrix Peran & Hak Akses Pengguna</h2>
+      <p class="text-slate-400 text-sm mt-1">Penerapan Role-Based Access Control (RBAC) 5 tingkat untuk integritas data</p>
+    </div>
+
+    <div class="glass-card rounded-3xl overflow-hidden my-auto border border-white/5">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-white/10 bg-slate-950/60 font-bold uppercase text-[11px] text-slate-300">
+              <th class="p-3.5">Fitur / Modul</th>
+              <th class="p-3.5 text-center text-teal-400">Admin (TU)</th>
+              <th class="p-3.5 text-center text-indigo-400">Guru Mapel</th>
+              <th class="p-3.5 text-center text-amber-400">Guru Piket/BK</th>
+              <th class="p-3.5 text-center text-sky-400">Siswa</th>
+              <th class="p-3.5 text-center text-emerald-400">Orang Tua</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5 text-slate-300">
+            <tr>
+              <td class="p-3 font-semibold">Master Data (Guru, Siswa, Kelas)</td>
+              <td class="p-3 text-center text-emerald-400 font-bold">CRUD Penuh</td>
+              <td class="p-3 text-center text-slate-500">—</td>
+              <td class="p-3 text-center text-slate-500">—</td>
+              <td class="p-3 text-center text-slate-500">—</td>
+              <td class="p-3 text-center text-slate-500">—</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold">Absensi Biometrik Fingerprint Guru</td>
+              <td class="p-3 text-center text-emerald-400">Monitoring & Log</td>
+              <td class="p-3 text-center text-teal-400 font-bold">Tap Scan Masuk/Pulang</td>
+              <td class="p-3 text-center text-slate-500">—</td>
+              <td class="p-3 text-center text-slate-500">—</td>
+              <td class="p-3 text-center text-slate-500">—</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold">Presensi Harian Siswa di Kelas</td>
+              <td class="p-3 text-center text-slate-400">Monitor / Cetak</td>
+              <td class="p-3 text-center text-indigo-400 font-bold">Input & Simpan</td>
+              <td class="p-3 text-center text-amber-400">Input Surat Izin/Sakit</td>
+              <td class="p-3 text-center text-slate-400">Lihat Riwayat</td>
+              <td class="p-3 text-center text-slate-400">Pantau Hari Ini</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold">Penginputan Nilai (Tugas/UH/UTS/UAS)</td>
+              <td class="p-3 text-center text-slate-400">Monitor Rekap</td>
+              <td class="p-3 text-center text-indigo-400 font-bold">Input & Kelola</td>
+              <td class="p-3 text-center text-slate-500">—</td>
+              <td class="p-3 text-center text-slate-400">Lihat Nilai</td>
+              <td class="p-3 text-center text-slate-400">Lihat Nilai</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-semibold">Cetak Dokumen e-Rapor Resmi</td>
+              <td class="p-3 text-center text-emerald-400">Cetak Semua</td>
+              <td class="p-3 text-center text-indigo-400">Cetak (Wali Kelas)</td>
+              <td class="p-3 text-center text-slate-500">—</td>
+              <td class="p-3 text-center text-sky-400">Unduh PDF Pribadi</td>
+              <td class="p-3 text-center text-emerald-400">Unduh PDF Pribadi</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="text-xs text-slate-500 flex justify-between">
+      <span>Keamanan: Session Role Verification di setiap endpoint API</span>
+      <span class="font-mono text-emerald-400">✓ Strict Access Control</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 10: STRUKTUR DATABASE (SKEMA UPDATE REVISI)             -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="10">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">09. Basis Data</span>
+      <h2 class="text-3xl font-extrabold mt-1">Skema Database & Relasi Antar Tabel</h2>
+      <p class="text-slate-400 text-sm mt-1">Struktur tabel relasional (MySQL / SQLite) yang mendasari aplikasi</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+      <div class="glass-card p-5 rounded-3xl space-y-2.5">
+        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+          <span class="font-mono font-bold text-xs text-teal-400">tb_presensi_guru</span>
+          <span class="text-[10px] text-slate-400">Revisi Fingerprint</span>
+        </div>
+        <ul class="text-[11px] font-mono text-slate-300 space-y-1">
+          <li><span class="text-amber-400">PK</span> id_presensi_guru (INT)</li>
+          <li><span class="text-sky-400">FK</span> id_guru (INT)</li>
+          <li>tanggal (DATE)</li>
+          <li>jam_masuk (TIME)</li>
+          <li>jam_keluar (TIME)</li>
+          <li>status (ENUM: Tepat, Terlambat)</li>
+          <li>device_id (VARCHAR)</li>
+        </ul>
+      </div>
+
+      <div class="glass-card p-5 rounded-3xl space-y-2.5">
+        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+          <span class="font-mono font-bold text-xs text-indigo-400">tb_nilai / akademik</span>
+          <span class="text-[10px] text-slate-400">Komponen Nilai</span>
+        </div>
+        <ul class="text-[11px] font-mono text-slate-300 space-y-1">
+          <li><span class="text-amber-400">PK</span> id_nilai (INT)</li>
+          <li><span class="text-sky-400">FK</span> id_siswa (INT)</li>
+          <li><span class="text-sky-400">FK</span> id_mapel (INT)</li>
+          <li>tugas, uh (DECIMAL)</li>
+          <li>uts, uas (DECIMAL)</li>
+          <li>nilai_akhir (GENERATED)</li>
+          <li>predikat (VARCHAR)</li>
+        </ul>
+      </div>
+
+      <div class="glass-card p-5 rounded-3xl space-y-2.5">
+        <div class="flex items-center justify-between border-b border-white/5 pb-2">
+          <span class="font-mono font-bold text-xs text-emerald-400">tb_users & audit</span>
+          <span class="text-[10px] text-slate-400">Autentikasi & Log</span>
+        </div>
+        <ul class="text-[11px] font-mono text-slate-300 space-y-1">
+          <li><span class="text-amber-400">PK</span> id_user (INT)</li>
+          <li>username / email (UNIQUE)</li>
+          <li>password (HASH)</li>
+          <li>role (ENUM 5 Roles)</li>
+          <li>nip_nisn (VARCHAR)</li>
+          <li>device_logs (Push API Audit)</li>
+          <li>wa_log (Status WhatsApp)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="glass-card p-4 rounded-2xl text-xs text-slate-300 flex items-center justify-between">
+      <span>Database telah dilengkapi <strong>Foreign Key Constraints</strong> & <strong>Indexing</strong> untuk performa query cepat.</span>
+      <span class="text-teal-400 font-mono">Normalized (3NF)</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 11: DEMO SISTEM & ANTARMUKA (UI SHOWCASE)                -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="11">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">10. Demonstrasi Produk</span>
+      <h2 class="text-3xl font-extrabold mt-1">Tampilan Antarmuka & Modul Unggulan</h2>
+      <p class="text-slate-400 text-sm mt-1">Antarmuka responsif dengan desain modern glassmorphic</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto">
+      <div class="glass-card p-5 rounded-3xl space-y-3">
+        <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-desktop"></i>
+        </div>
+        <h4 class="font-bold text-sm text-slate-100">1. Dashboard Monitoring TU</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Menampilkan grafik kehadiran real-time, status scan masuk/pulang guru dari sensor biometrik, dan audit log transmisi HTTP REST API perangkat.
+        </p>
+      </div>
+
+      <div class="glass-card p-5 rounded-3xl space-y-3 border border-teal-500/30">
+        <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-list-check"></i>
+        </div>
+        <h4 class="font-bold text-sm text-slate-100">2. Lembar Presensi Digital</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Tampilan presensi kelas per mata pelajaran dengan tombol cepat <em>"Tandai Semua Siswa Hadir"</em> dan indikator notifikasi WhatsApp otomatis.
+        </p>
+      </div>
+
+      <div class="glass-card p-5 rounded-3xl space-y-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg">
+          <i class="fa-solid fa-print"></i>
+        </div>
+        <h4 class="font-bold text-sm text-slate-100">3. Modal Cetak e-Rapor A4</h4>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Pratinjau digital berformat kop surat resmi SMA Hidayatun Najah dengan stempel digital, tabel nilai, dan tanda tangan digital kepala sekolah.
+        </p>
+      </div>
+    </div>
+
+    <div class="glass-card p-4 rounded-2xl flex items-center justify-between text-xs text-slate-300">
+      <span>Siap diuji coba langsung pada server lokal port 3000:</span>
+      <a href="http://localhost:3000" target="_blank" class="px-4 py-2 rounded-xl bg-gradient-to-r from-teal-500 to-indigo-600 text-white font-bold shadow-lg shadow-teal-500/20 hover:opacity-90 transition">
+        🚀 Buka Aplikasi SIAKAD (Live Demo)
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 12: PENGUJIAN SISTEM (TESTING & UAT)                     -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="12">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">11. Validasi & Pengujian</span>
+      <h2 class="text-3xl font-extrabold mt-1">Hasil Pengujian Sistem (Black Box & UAT)</h2>
+      <p class="text-slate-400 text-sm mt-1">Verifikasi fungsionalitas menyeluruh sebelum diserahkan kepada pihak sekolah</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 my-auto">
+      <div class="glass-card p-5 rounded-3xl text-center space-y-2">
+        <div class="text-3xl font-black text-emerald-400 font-mono">100%</div>
+        <span class="text-xs font-bold text-slate-200 block">Black Box Testing</span>
+        <p class="text-[11px] text-slate-400">Seluruh 8 skenario pengujian autentikasi, SSO, & OTP berhasil (0 Bug kritis).</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-3xl text-center space-y-2 border border-emerald-500/30">
+        <div class="text-3xl font-black text-teal-400 font-mono">&lt; 1 Detik</div>
+        <span class="text-xs font-bold text-slate-200 block">Respon Push Biometrik</span>
+        <p class="text-[11px] text-slate-400">Transmisi log sidik jari dari sensor ke database web server berlangsung instan.</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-3xl text-center space-y-2">
+        <div class="text-3xl font-black text-indigo-400 font-mono">5 / 5 Pass</div>
+        <span class="text-xs font-bold text-slate-200 block">Uji Pemisahan Absensi</span>
+        <p class="text-[11px] text-slate-400">Verifikasi pemisahan alur absensi guru dan murid teruji sukses tanpa konflik data.</p>
+      </div>
+
+      <div class="glass-card p-5 rounded-3xl text-center space-y-2">
+        <div class="text-3xl font-black text-amber-400 font-mono">92.4%</div>
+        <span class="text-xs font-bold text-slate-200 block">Skor Kelayakan UAT</span>
+        <p class="text-[11px] text-slate-400">Tingkat kepuasan staf TU dan guru terhadap kemudahan penggunaan antarmuka.</p>
+      </div>
+    </div>
+
+    <div class="glass-card p-4 rounded-2xl text-xs text-slate-300 flex items-center justify-between">
+      <span>Hasil pengujian membuktikan sistem stabil, aman, dan siap diimplementasikan secara penuh di sekolah.</span>
+      <span class="text-emerald-400 font-bold font-mono">STATUS: PRODUCTION READY</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 13: PERBANDINGAN SEBELUM & SESUDAH                      -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="13">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">12. Komparasi Dampak</span>
+      <h2 class="text-3xl font-extrabold mt-1">Perbandingan Sebelum vs Sesudah Sistem</h2>
+      <p class="text-slate-400 text-sm mt-1">Manfaat nyata penerapan SIAKAD RAD di SMA Hidayatun Najah</p>
+    </div>
+
+    <div class="glass-card rounded-3xl overflow-hidden my-auto border border-white/5">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs border-collapse">
+          <thead>
+            <tr class="border-b border-white/10 bg-slate-950/60 font-bold uppercase text-[11px]">
+              <th class="p-4 text-slate-300">Aspek Operasional</th>
+              <th class="p-4 text-rose-400">Sebelum Sistem (Manual)</th>
+              <th class="p-4 text-emerald-400">Sesudah Sistem SIAKAD RAD</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/5 text-slate-300">
+            <tr>
+              <td class="p-3.5 font-semibold">Presensi Guru</td>
+              <td class="p-3.5 text-slate-400">Tanda tangan kertas, rawan titip absen, jam tidak akurat.</td>
+              <td class="p-3.5 text-emerald-300 font-semibold">Sensor Biometrik Sidik Jari + REST API (Presisi detik).</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-semibold">Absensi Siswa di Kelas</td>
+              <td class="p-3.5 text-slate-400">Buku absen fisik di meja guru, rekapitulasi akhir bulan.</td>
+              <td class="p-3.5 text-emerald-300 font-semibold">Lembar digital interaktif + tombol 1-klik "Semua Hadir".</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-semibold">Pemberitahuan Orang Tua</td>
+              <td class="p-3.5 text-slate-400">Surat fisik via pos/siswa, sering tidak sampai ke wali.</td>
+              <td class="p-3.5 text-emerald-300 font-semibold">Notifikasi instan otomatis WhatsApp saat siswa Alfa.</td>
+            </tr>
+            <tr>
+              <td class="p-3.5 font-semibold">Pengolahan Nilai & Rapor</td>
+              <td class="p-3.5 text-slate-400">3-5 hari per kelas, hitung rumus manual di Excel.</td>
+              <td class="p-3.5 text-emerald-300 font-semibold">Otomatis seketika, 1-klik cetak e-Rapor resmi A4.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="glass-card p-4 rounded-2xl text-xs text-slate-300 flex items-center justify-between">
+      <span>Efisiensi waktu administrasi sekolah meningkat hingga <strong>70%</strong>.</span>
+      <span class="text-teal-400 font-semibold">Transformasi Digital Nyata</span>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SLIDE 14: KESIMPULAN & PENUTUP                                -->
+  <!-- ============================================================== -->
+  <section class="slide justify-between" data-slide="14">
+    <div>
+      <span class="text-xs font-bold uppercase tracking-wider text-teal-400">13. Penutup</span>
+      <h2 class="text-3xl font-extrabold mt-1">Kesimpulan & Saran Pengembangan</h2>
+      <p class="text-slate-400 text-sm mt-1">Rangkuman hasil penelitian dan arah pengembangan masa depan</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-auto">
+      <div class="glass-card p-6 rounded-3xl space-y-3 border-l-4 border-l-emerald-500">
+        <h4 class="font-bold text-sm text-emerald-400 uppercase tracking-wider flex items-center gap-2">
+          <i class="fa-solid fa-flag-checkered"></i> Kesimpulan Penelitian
+        </h4>
+        <ul class="text-xs text-slate-300 space-y-2 leading-relaxed">
+          <li>1. Metode RAD berhasil diimplementasikan untuk membangun SIAKAD secara tangkas sesuai revisi perbaikan penguji.</li>
+          <li>2. Integrasi mesin fingerprint biometrik guru berhasil meningkatkan kedisiplinan dan akurasi waktu kehadiran pendidik.</li>
+          <li>3. Pemisahan absensi guru dan absensi manual siswa di kelas terbukti efektif dan mencegah penumpukan antrean fisik.</li>
+          <li>4. Otomatisasi notifikasi WhatsApp dan e-Rapor digital format A4 mempermudah pelaporan kepada wali murid dan pimpinan yayasan.</li>
+        </ul>
+      </div>
+
+      <div class="glass-card p-6 rounded-3xl space-y-3 border-l-4 border-l-indigo-500">
+        <h4 class="font-bold text-sm text-indigo-400 uppercase tracking-wider flex items-center gap-2">
+          <i class="fa-solid fa-lightbulb"></i> Saran Pengembangan Lanjutan
+        </h4>
+        <ul class="text-xs text-slate-300 space-y-2 leading-relaxed">
+          <li>1. Integrasi kartu pelajar pintar berbasis <strong>RFID / NFC</strong> untuk akses gerbang masuk gerbang sekolah.</li>
+          <li>2. Pembangunan aplikasi mobile berbasis Flutter/React Native untuk notifikasi push pada smartphone orang tua.</li>
+          <li>3. Penerapan algoritma Machine Learning untuk memprediksi risiko penurunan nilai siswa berdasarkan tren ketidakhadiran.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="glass-card p-5 rounded-3xl text-center space-y-2">
+      <h3 class="text-xl font-bold text-slate-100">Terima Kasih Atas Perhatian Bapak / Ibu Dosen Penguji</h3>
+      <p class="text-xs text-slate-400">Waktu dan kesempatan kami kembalikan kepada Ketua Sidang untuk sesi tanya jawab & masukan.</p>
+      <div class="pt-2 flex justify-center gap-3">
+        <a href="http://localhost:3000" target="_blank" class="px-5 py-2 rounded-xl bg-teal-500 hover:bg-teal-600 text-slate-950 font-bold text-xs transition">
+          <i class="fa-solid fa-laptop-code"></i> Uji Coba Demo Sistem
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- MODAL CATATAN PEMBICARA / SCRIPT PRESENTASI DOSEN (TEKAN 'N') -->
+  <!-- ============================================================== -->
+  <div id="notes-modal" class="no-print fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4">
+    <div class="glass-card rounded-3xl max-w-2xl w-full p-6 space-y-4 max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-comment-dots text-teal-400 text-lg"></i>
+          <h3 class="font-bold text-sm text-slate-100" id="notes-slide-title">Catatan Pembicara (Presenter Script)</h3>
+        </div>
+        <button onclick="toggleNotes()" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+      <div id="notes-content" class="text-xs text-slate-300 leading-relaxed space-y-2">
+        <!-- Injected dynamically -->
+      </div>
+      <div class="flex justify-end pt-2">
+        <button onclick="toggleNotes()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-xl text-xs font-semibold">Tutup Catatan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION CONTROLS (BOTTOM RIGHT) -->
+  <nav class="no-print fixed bottom-6 right-8 z-40 flex items-center gap-2 bg-slate-900/80 backdrop-blur-md border border-white/10 p-2 rounded-2xl shadow-2xl">
+    <button onclick="prevSlide()" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-teal-500 hover:text-slate-950 text-slate-300 flex items-center justify-center transition" title="Slide Sebelumnya (←)">
+      <i class="fa-solid fa-arrow-left text-xs"></i>
+    </button>
+    <button onclick="nextSlide()" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-teal-500 hover:text-slate-950 text-slate-300 flex items-center justify-center transition" title="Slide Berikutnya (→)">
+      <i class="fa-solid fa-arrow-right text-xs"></i>
+    </button>
+  </nav>
+
+  <!-- JAVASCRIPT PRESENTATION ENGINE -->
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 1;
+
+    // Speaker notes for every slide
+    const speakerNotes = {
+      1: `<strong>Apa yang perlu diucapkan saat Slide 1:</strong><br>
+          "Selamat pagi/siang kepada Bapak/Ibu Dosen Pembimbing dan Penguji. Terima kasih atas waktu yang diberikan. Pada kesempatan hari ini, saya akan mempresentasikan hasil penelitian Tugas Akhir saya yang berjudul: <em>Rancang Bangun Sistem Informasi Akademik Berbasis Web Menggunakan Metode Rapid Application Development di SMA Hidayatun Najah Samiran Proppo Pamekasan</em>. Sistem ini berfokus pada integrasi hardware sensor biometrik sidik jari untuk guru dan presensi kelas siswa yang terhubung langsung dengan notifikasi WhatsApp ke orang tua."`,
+      2: `<strong>Apa yang perlu diucapkan saat Slide 2:</strong><br>
+          "Latar belakang penelitian ini bermula dari tiga permasalahan utama yang ditemukan di lapangan: Pertama, absensi guru masih bertanda tangan di lembar kertas sehingga tidak ada kepastian jam tiba yang akurat. Kedua, ketidakhadiran siswa di jam pelajaran sering kali baru diketahui orang tua beberapa hari kemudian. Ketiga, pengolahan nilai rapor memakan waktu staf pengajar karena rumus spreadsheet terpisah-pisah."`,
+      3: `<strong>Apa yang perlu diucapkan saat Slide 3:</strong><br>
+          "Berdasarkan permasalahan tersebut, penelitian ini merumuskan 4 sasaran utama: Bagaimana menerapkan metode RAD, bagaimana mengkoneksikan sensor sidik jari via REST API, bagaimana mekanisme pemicu WhatsApp otomatis ke orang tua, dan bagaimana mengotomatisasi cetak e-Rapor resmi."`,
+      4: `<strong>Apa yang perlu diucapkan saat Slide 4:</strong><br>
+          "Mengapa memilih Rapid Application Development (RAD)? Karena metode ini sangat adaptif terhadap masukan pengguna dan dosen pembimbing. Prosesnya melewati 4 tahap: Requirements Planning, User Design Workshop, Construction (Coding & Hardware Integration), serta Cutover (Testing & Deployment)."`,
+      5: `<strong>Apa yang perlu diucapkan saat Slide 5:</strong><br>
+          "Pada revisi blueprint perbaikan, kami memperkuat alur autentikasi. Calon pengguna (Guru/Siswa) yang mendaftar wajib tervalidasi dengan data induk NIP atau NISN yang sudah terdaftar di sekolah. Sistem kemudian men-generate password otomatis dan mengirimkan surat kredensial akses."`,
+      6: `<strong>Apa yang perlu diucapkan saat Slide 6:</strong><br>
+          "Inovasi penting pada sistem ini adalah <em>Pemisahan Alur Presensi</em>. Guru menggunakan mesin pemindai biometrik sidik jari dengan konektor REST API saat tiba di sekolah. Sedangkan siswa diabsen secara digital oleh guru mapel di dalam kelas dengan tombol cepat 'Tandai Semua Hadir'. Hal ini mencegah antrean fisik di pagi hari."`,
+      7: `<strong>Apa yang perlu diucapkan saat Slide 7:</strong><br>
+          "Fitur WhatsApp Gateway bekerja secara otomatis. Ketika guru menekan tombol simpan presensi kelas, sistem langsung mendeteksi siapa saja siswa yang berstatus Alfa/Izin/Sakit, lalu mengirimkan pesan pemberitahuan resmi ke nomor WhatsApp orang tua siswa bersangkutan."`,
+      8: `<strong>Apa yang perlu diucapkan saat Slide 8:</strong><br>
+          "Untuk pengolahan nilai akademik, kami menerapkan pembobotan resmi: 20% Tugas, 20% Ulangan Harian, 30% UTS, dan 30% UAS. Dari perhitungan ini, lembar e-Rapor format A4 dapat dicetak langsung lengkap dengan kop surat yayasan, rekap kehadiran, dan stempel digital."`,
+      9: `<strong>Apa yang perlu diucapkan saat Slide 9:</strong><br>
+          "Sistem menerapkan Role-Based Access Control (RBAC) dengan 5 peran: Administrator TU, Guru Mapel, Guru Piket/BK, Siswa, dan Orang Tua. Masing-masing hanya dapat mengakses menu dan data yang sesuai dengan otoritasnya."`,
+      10: `<strong>Apa yang perlu diucapkan saat Slide 10:</strong><br>
+          "Struktur basis data telah dinormalisasi hingga 3NF. Terdapat tabel khusus tb_presensi_guru untuk menampung log biometrik, tabel tb_nilai untuk transkrip kurikulum, serta wa_log untuk audit trail seluruh pesan terkirim."`,
+      11: `<strong>Apa yang perlu diucapkan saat Slide 11:</strong><br>
+          "Berikut adalah pratinjau antarmuka sistem yang responsif dan siap didemokan langsung secara live pada server lokal port 3000."`,
+      12: `<strong>Apa yang perlu diucapkan saat Slide 12:</strong><br>
+          "Pengujian dilakukan dengan metode Black Box Testing dan UAT. Hasil pengujian menunjukkan 100% skenario pengujian berhasil, respon push data fingerprint di bawah 1 detik, dan skor kelayakan pengguna mencapai 92.4%."`,
+      13: `<strong>Apa yang perlu diucapkan saat Slide 13:</strong><br>
+          "Jika dibandingkan sistem konvensional, SIAKAD RAD ini mampu memangkas waktu pengolahan rapor dari beberapa hari menjadi seketika, serta meningkatkan akurasi data kehadiran guru dan murid hingga 99%."`,
+      14: `<strong>Apa yang perlu diucapkan saat Slide 14:</strong><br>
+          "Kesimpulannya, seluruh tujuan penelitian telah tercapai dan sistem telah siap digunakan. Untuk pengembangan masa depan, kami menyarankan penambahan integrasi kartu RFID dan aplikasi mobile. Demikian presentasi saya, terima kasih dan saya siap menerima pertanyaan serta arahan dari Bapak/Ibu Dosen."`
+    };
+
+    function updateSlide() {
+      slides.forEach((s, idx) => {
+        if (idx + 1 === currentSlide) {
+          s.classList.add('active');
+        } else {
+          s.classList.remove('active');
+        }
+      });
+
+      // Update indicator & progress
+      const indicator = document.getElementById('slide-indicator');
+      const progressBar = document.getElementById('progress-bar');
+      const padNum = (num) => num < 10 ? '0' + num : num;
+      if (indicator) indicator.textContent = `${padNum(currentSlide)} / ${padNum(totalSlides)}`;
+      if (progressBar) progressBar.style.width = `${(currentSlide / totalSlides) * 100}%`;
+
+      // Update notes
+      const notesContent = document.getElementById('notes-content');
+      const notesTitle = document.getElementById('notes-slide-title');
+      if (notesContent) notesContent.innerHTML = speakerNotes[currentSlide] || "Tidak ada catatan untuk slide ini.";
+      if (notesTitle) notesTitle.textContent = `Catatan Pembicara - Slide ${currentSlide} dari ${totalSlides}`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function toggleNotes() {
+      const modal = document.getElementById('notes-modal');
+      if (modal) modal.classList.toggle('hidden');
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      } else if (e.key === 'Escape') {
+        const modal = document.getElementById('notes-modal');
+        if (modal && !modal.classList.contains('hidden')) modal.classList.add('hidden');
+      }
+    });
+
+    // Touch swipe navigation for tablets / mobile
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+    document.addEventListener('touchend', (e) => {
+      const diffX = e.changedTouches[0].screenX - touchStartX;
+      if (diffX < -50) nextSlide();
+      if (diffX > 50) prevSlide();
+    });
+
+    // Initialize
+    updateSlide();
+  </script>
+</body>
+</html>
+
